@@ -1,8 +1,8 @@
 # Avoid duplicate entries
 export HISTCONTROL=ignoreboth:erasedups
 
-HISTFILESIZE=1000000000
-HISTSIZE=1000000
+export HISTSIZE=32768
+export HISTFILESIZE=$HISTSIZE
 
 # Append to history file
 shopt -s histappend
@@ -38,7 +38,7 @@ export EDITOR="nvim"
 export CLICOLOR=1
 
 # Highlight `grep` matches
-export GREP_OPTIONS='--color=auto'
+export GREP_OPTIONS="--color=auto"
 
 less_options=(
 	# If the entire text fits on one screen, show it and quit
@@ -64,4 +64,7 @@ less_options=(
 );
 export LESS="${less_options[*]}"
 unset less_options
-export PAGER='less'
+# Highlight section titles in manual pages
+export LESS_TERMCAP_md="$ORANGE"
+export PAGER="less"
+export MANPAGER="less"
