@@ -16,7 +16,7 @@ local_username="ulken"
 # User color
 case $(id -u) in
 	0) user_color="$WHITE" ;;  # root
-	*) user_color="$GREEN" ;;
+	*) user_color="$CYAN" ;;
 esac
 
 # Symbols
@@ -66,11 +66,11 @@ function prompt_command() {
 	first_line="$user_prompt$host_prompt$login_delimiter$BLUE\w$NOCOLOR$git_prompt"
 	# Text (commands) inside \[...\] does not impact line length calculation which fixes stange bug when looking through the history
 	# $? is a status of last command, should be processed every time prompt prints
-	second_line="\`if [ \$? = 0 ]; then echo \[\$CYAN\]; else echo \[\$RED\]; fi\`\$prompt_symbol\[\$NOCOLOR\] "
+	second_line="\`if [ \$? = 0 ]; then echo \[\$GREEN\]; else echo \[\$RED\]; fi\`\$prompt_symbol\[\$NOCOLOR\] "
 	PS1="\n$first_line\n$second_line"
 
 	# Multiline command
-	PS2="\[$CYAN\]$prompt_symbol\[$NOCOLOR\] "
+	PS2="\[$GREEN\]$prompt_symbol\[$NOCOLOR\] "
 
 	# Terminal title
 	local title="$(basename "$PWD")"
