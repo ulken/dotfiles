@@ -37,9 +37,6 @@ export EDITOR="nvim"
 # Colorful ls
 export CLICOLOR=1
 
-# Highlight `grep` matches
-export GREP_OPTIONS="--color=auto"
-
 less_options=(
 	# If the entire text fits on one screen, show it and quit
 	--quit-if-one-screen

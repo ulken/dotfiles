@@ -24,6 +24,9 @@ alias la="ls -laFG"
 # List only directories
 alias ld="ls -lFG | grep --color=never '^d'"
 
+# Highlight `grep` matches
+alias grep="grep --color=auto"
+
 # Show/hide hidden files
 alias shf="defaults write com.apple.Finder AppleShowAllFiles -bool true && killall Finder"
 alias hhf="defaults write com.apple.Finder AppleShowAllFiles -bool false && killall Finder"
