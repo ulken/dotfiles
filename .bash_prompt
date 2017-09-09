@@ -23,31 +23,33 @@ esac
 prompt_symbol="❯"
 prompt_dirty_symbol="* "
 
+# Used to _not_ print initial newline in fresh shells
+first_prompt=1
+
 function prompt_command() {
 	# Local or SSH session?
 	local remote=
 	[ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ] && remote=1
 
-	# Git branch name and work tree status (only when we are inside Git working tree)
-	local git_prompt=
-	if [[ "true" = "$(git rev-parse --is-inside-work-tree 2>/dev/null)" ]]; then
-		# Branch name
-		local branch="$(git symbolic-ref HEAD 2>/dev/null)"
-		branch="${branch##refs/heads/}"
+    # Only show git status if installed
+    local git_prompt=
+    if command -v git >/dev/null 2>&1; then
+        # git branch name and work tree status (only when we are inside git working tree)
+        if [[ "true" = "$(git rev-parse --is-inside-work-tree 2>/dev/null)" ]]; then
+            # Branch name
+            local branch="$(git symbolic-ref HEAD 2>/dev/null)"
+            branch="${branch##refs/heads/}"
 
-		# Working tree status (red when dirty)
-		local dirty=
-		# Modified files
-		git diff --no-ext-diff --quiet --exit-code --ignore-submodules 2>/dev/null || dirty=1
-		# Untracked files
-		[ -z "$dirty" ] && test -n "$(git status --porcelain --ignore-submodules -unormal)" && dirty=1
+            # Working tree status (red when dirty)
+            local dirty=
+            # Modified files
+            git diff --no-ext-diff --quiet --exit-code --ignore-submodules 2>/dev/null || dirty=1
+            # Untracked files
+            [ -z "$dirty" ] && test -n "$(git status --porcelain --ignore-submodules -unormal)" && dirty=1
 
-		# Format Git info
-		if [ -n "$dirty" ]; then
-			git_prompt=" $GRAY$branch$prompt_dirty_symbol$NOCOLOR"
-		else
-			git_prompt=
-		fi
+            # Format git info
+            [ -n "$dirty" ] && git_prompt=" $GRAY$branch$prompt_dirty_symbol$NOCOLOR"
+        fi
 	fi
 
 	# Only show username if not default
@@ -64,10 +66,12 @@ function prompt_command() {
 
 	# Format prompt
 	first_line="$user_prompt$host_prompt$login_delimiter$BLUE\w$NOCOLOR$git_prompt"
-	# Text (commands) inside \[...\] does not impact line length calculation which fixes stange bug when looking through the history
+	# Don't print initial newline in fresh shells
+	if [ $first_prompt = 1 ]; then first_prompt=0; else first_line="\n$first_line"; fi
+	# Text (commands) inside \[...\] does not impact line length calculation which fixes strange bug when looking through the history
 	# $? is a status of last command, should be processed every time prompt prints
 	second_line="\`if [ \$? = 0 ]; then echo \[\$GREEN\]; else echo \[\$RED\]; fi\`\$prompt_symbol\[\$NOCOLOR\] "
-	PS1="\n$first_line\n$second_line"
+	PS1="$first_line\n$second_line"
 
 	# Multiline command
 	PS2="\[$GREEN\]$prompt_symbol\[$NOCOLOR\] "
@@ -78,5 +82,4 @@ function prompt_command() {
 	echo -ne "\033]0;$title"; echo -ne "\007"
 }
 
-# Show awesome prompt only if Git is istalled
-command -v git >/dev/null 2>&1 && PROMPT_COMMAND=prompt_command
+PROMPT_COMMAND=prompt_command
