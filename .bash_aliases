@@ -31,5 +31,6 @@ alias grep="grep --color=auto"
 alias shf="defaults write com.apple.Finder AppleShowAllFiles -bool true && killall Finder"
 alias hhf="defaults write com.apple.Finder AppleShowAllFiles -bool false && killall Finder"
 
-# Local IP address
+# Local and public IP addresses
 alias ip="ipconfig getifaddr en0"
+alias pubip="curl -s icanhazip.com"
