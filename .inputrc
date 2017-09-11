@@ -1,0 +1,17 @@
+# Turn off annyoing bell sound
+set bell-style none
+# Perform file completion in a case insensitive fashion
+set completion-ignore-case on
+# Treat hyphens and underscores as equivalent
+set completion-map-case on
+# Display matches for ambiguous patterns at first tab press
+set show-all-if-ambiguous on
+# Immediately add a trailing slash when autocompleting symlinks to directories
+set mark-symlinked-directories on
+# Enable incremental history search with up/down arrows
+"\e[A": history-search-backward
+"\e[B": history-search-forward
+"\e[C": forward-char
+"\e[D": backward-char
+# Vi keybindings
+set editing-mode vi
