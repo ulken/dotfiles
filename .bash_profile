@@ -1,3 +1,7 @@
+# Use US English UTF-8 for international characters like åäö to work in terminal
+export LC_ALL=en_US.UTF-8  
+export LANG=en_US.UTF-8
+
 # Avoid duplicate entries
 export HISTCONTROL=erasedups:ignoreboth
 
