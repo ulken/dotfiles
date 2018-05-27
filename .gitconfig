@@ -1,0 +1,10 @@
+[user]
+  user = ulken
+  name = Oskar Löfgren
+  email = islander.abroad@gmail.com
+[credential]
+  helper = osxkeychain
+[core]
+  autocrlf = input
+[push]
+  default = simple
