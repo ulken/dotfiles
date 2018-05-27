@@ -6,5 +6,6 @@
   helper = osxkeychain
 [core]
   autocrlf = input
+  excludesfile = ~/.gitexcludes
 [push]
   default = simple
