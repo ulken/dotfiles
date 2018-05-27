@@ -2,7 +2,7 @@ github_user="ulken"
 
 # Sync current git repo with GitHub
 # USAGE: git-add-gh [repo]
-function git-github() {
+function git-add-gh() {
 	local repo=${1-`basename "$(pwd)"`}
 	git remote add origin "git@github.com:$github_user/$repo.git"
 	git push -u origin master
