@@ -22,7 +22,7 @@ alias l="ls -lFG"
 alias la="ls -laFG"
 
 # List only directories
-alias ld="ls -lFG | grep --color=never '^d'"
+alias ld="la | grep --color=never '^d'"
 
 # Highlight `grep` matches
 alias grep="grep --color=auto"
