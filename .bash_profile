@@ -61,7 +61,7 @@ bind Space:magic-space
 command -v brew >/dev/null 2>&1 && [ -r "$(brew --prefix)/etc/bash_completion" ] && source "$(brew --prefix)/etc/bash_completion"
 
 # Default editor
-export EDITOR="nvim"
+export EDITOR="code"
 
 # Colorful ls
 export CLICOLOR=1
@@ -72,9 +72,6 @@ export PROMPT_DIRTRIM=2
 # Define cd targets
 # Add the directories you want to have fast access to, separated by colon
 CDPATH=".:~:~/dev"
-
-export dropbox="~/Dropbox"
-export dev="~/dev"
 
 # Less/man pages
 less_options=(
