@@ -1,3 +1,6 @@
+# Override builtin cd to list files also
+function cd() { builtin cd "$@" && ls; }
+
 # Create a new directory and enter it
 function md() {
 	mkdir -p "$@" && cd "$@"
